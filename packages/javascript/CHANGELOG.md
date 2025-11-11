@@ -1,5 +1,11 @@
 # @livekit/protocol
 
+## 1.43.1
+
+### Patch Changes
+
+- add session features to room observability - [#1298](https://github.com/livekit/protocol/pull/1298) ([@paulwe](https://github.com/paulwe))
+
 ## 1.43.0
 
 ### Minor Changes
