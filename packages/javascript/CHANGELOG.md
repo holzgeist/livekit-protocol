@@ -1,5 +1,13 @@
 # @livekit/protocol
 
+## 1.53.1
+
+### Patch Changes
+
+- Add `agent_job_pending` webhook event, `JS_CANCELLED` job status, and `JobState.reason` (including `JSR_RETRYING`) - [#1860](https://github.com/livekit/protocol/pull/1860) ([@erikhortsch](https://github.com/erikhortsch))
+
+- `StreamDestination` (`id`, `url`) on `StreamOutput.destinations` and `UpdateStreamRequest.add_destinations`, echoed as `StreamInfo.id`, so a client can tell its streams apart; `RedactStreamKeys` redacts destination URLs - [#1873](https://github.com/livekit/protocol/pull/1873) ([@frostbyte73](https://github.com/frostbyte73))
+
 ## 1.53.0
 
 ### Minor Changes

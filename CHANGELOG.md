@@ -1,5 +1,11 @@
 # github.com/livekit/protocol
 
+## 1.53.1
+
+### Patch Changes
+
+- Add `agent_job_pending` webhook event, `JS_CANCELLED` job status, and `JobState.reason` (including `JSR_RETRYING`) - [#1860](https://github.com/livekit/protocol/pull/1860) ([@erikhortsch](https://github.com/erikhortsch))
+
 ## 1.53.0
 
 ### Minor Changes
