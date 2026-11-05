@@ -14,7 +14,10 @@
 
 package webhook
 
-import "errors"
+import (
+	"errors"
+	"time"
+)
 
 var (
 	ErrNoAuthHeader    = errors.New("authorization header could not be found")
@@ -26,6 +29,10 @@ const (
 	authHeader        = "Authorization"
 	contentTypeHeader = "content-type"
 	userAgentHeader   = "User-Agent"
+
+	// a token is signed once per webhook and reused for all retries,
+	// so it must stay valid for the whole retry window
+	tokenValidity = 2 * time.Hour
 )
 
 const (

@@ -373,7 +373,7 @@ func (r *ResourceURLNotifier) send(event *livekit.WebhookEvent, params *Resource
 	apiSecret := params.APISecret
 
 	at := auth.NewAccessToken(apiKey, apiSecret).
-		SetValidFor(5 * time.Minute).
+		SetValidFor(tokenValidity).
 		SetSha256(b64)
 	token, err := at.ToJWT()
 	if err != nil {

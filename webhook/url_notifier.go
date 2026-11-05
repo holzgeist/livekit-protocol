@@ -276,7 +276,7 @@ func (n *URLNotifier) send(event *livekit.WebhookEvent, params *URLNotifierParam
 	b64 := base64.StdEncoding.EncodeToString(sum[:])
 
 	at := auth.NewAccessToken(params.APIKey, params.APISecret).
-		SetValidFor(5 * time.Minute).
+		SetValidFor(tokenValidity).
 		SetSha256(b64)
 	token, err := at.ToJWT()
 	if err != nil {
