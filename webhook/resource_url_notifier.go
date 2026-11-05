@@ -48,6 +48,8 @@ var (
 type ResourceURLNotifierConfig struct {
 	MaxAge   time.Duration `yaml:"max_age,omitempty"`
 	MaxDepth int           `yaml:"max_depth,omitempty"`
+	// HTTP client settings (retries, backoff, timeout), inlined into this config's yaml
+	HTTPClient HTTPClientParams `yaml:",inline"`
 }
 
 var DefaultResourceURLNotifierConfig = ResourceURLNotifierConfig{

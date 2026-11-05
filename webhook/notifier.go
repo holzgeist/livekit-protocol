@@ -85,21 +85,23 @@ func NewDefaultNotifier(config WebHookConfig, kp auth.KeyProvider) (QueuedNotifi
 	}
 	for _, url := range config.URLs {
 		u := NewResourceURLNotifier(ResourceURLNotifierParams{
-			URL:          url,
-			Logger:       logger.GetLogger().WithComponent("webhook"),
-			APIKey:       config.APIKey,
-			APISecret:    apiSecret,
-			Config:       config.ResourceURLNotifier,
-			FilterParams: config.FilterParams,
+			HTTPClientParams: config.ResourceURLNotifier.HTTPClient,
+			URL:              url,
+			Logger:           logger.GetLogger().WithComponent("webhook"),
+			APIKey:           config.APIKey,
+			APISecret:        apiSecret,
+			Config:           config.ResourceURLNotifier,
+			FilterParams:     config.FilterParams,
 		})
 		n.notifiers = append(n.notifiers, u)
 	}
 
 	n.extraWebhookNotifier = NewResourceURLNotifier(ResourceURLNotifierParams{
-		Logger:    logger.GetLogger().WithComponent("webhook"),
-		APIKey:    config.APIKey,
-		APISecret: apiSecret,
-		Config:    config.ResourceURLNotifier,
+		HTTPClientParams: config.ResourceURLNotifier.HTTPClient,
+		Logger:           logger.GetLogger().WithComponent("webhook"),
+		APIKey:           config.APIKey,
+		APISecret:        apiSecret,
+		Config:           config.ResourceURLNotifier,
 	})
 
 	return n, nil
@@ -181,14 +183,14 @@ func (n *DefaultNotifier) SetFilter(params FilterParams) {
 // ---------------------------------
 
 type HTTPClientParams struct {
-	RetryWaitMin  time.Duration
-	RetryWaitMax  time.Duration
-	MaxRetries    int
-	ClientTimeout time.Duration
-	ForceIPv4     bool
+	RetryWaitMin  time.Duration `yaml:"retry_wait_min,omitempty"`
+	RetryWaitMax  time.Duration `yaml:"retry_wait_max,omitempty"`
+	MaxRetries    int           `yaml:"max_retries,omitempty"`
+	ClientTimeout time.Duration `yaml:"client_timeout,omitempty"`
+	ForceIPv4     bool          `yaml:"force_ipv4,omitempty"`
 	// receivers pin WAF rules to this, so it must stay stable across releases
 	// defaults to DefaultUserAgent
-	UserAgent string
+	UserAgent string `yaml:"user_agent,omitempty"`
 }
 
 type FilterParams struct {
